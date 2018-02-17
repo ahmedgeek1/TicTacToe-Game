@@ -20,6 +20,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     // Various text displayed
     private TextView mInfoTextView;
 
+    boolean mGameOver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +56,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
         if(mGame.checkForWinner()==3){
+            mGameOver = true;
             mInfoTextView.setText(R.string.result_computer_wins);
         } else if(mGame.checkForWinner()==2){
+            mGameOver = true;
             mInfoTextView.setText(R.string.result_human_wins);
         }else if(mGame.checkForWinner()==1){
+            mGameOver = true;
             mInfoTextView.setText(R.string.result_tie);
         }
 
+        if(mGameOver){
+            for (Button button : mBoardButtons) {
+                button.setEnabled(false);
+            }
+
+        }
 
 
     }
     // Set up the game board.
     private void startNewGame() {
+        mGameOver = false;
         mGame.clearBoard();
 
         mInfoTextView.setText(R.string.first_human);
