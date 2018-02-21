@@ -2,16 +2,21 @@ package com.example.a24210285.tictactoe;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.design.widget.Snackbar;
 
 
+import static android.os.SystemClock.sleep;
+import static com.example.a24210285.tictactoe.R.string.result_human_wins;
 import static com.example.a24210285.tictactoe.TicTacToeGame1.COMPUTER_PLAYER;
 import static com.example.a24210285.tictactoe.TicTacToeGame1.HUMAN_PLAYER;
 import static com.example.a24210285.tictactoe.TicTacToeGame1.OPEN_SPOT;
@@ -56,41 +61,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
 
         startNewGame();
-
-        /*if(!humanPlay){
-            //mInfoTextView.setText(R.string.turn_computer);
-            mGame.player = 'O';
-            setMove('O', mGame.getComputerMove());
-        }*/
-
-        /*if(humanPlay){
-            for(int i=0; i<=7; i++){
-                mGame.player = 'X';
-                for (Button button : mGame.mBoardButtons) {
-                    button.setOnClickListener(this);
-                }
-
-                //mInfoTextView.setText(R.string.turn_computer);
-                mGame.player = 'O';
-                setMove('O', mGame.getComputerMove());
-                // mInfoTextView.setText(R.string.turn_human);
-            }
-        }*/
-
-        if(mGame.checkForWinner()==3){
-            //mInfoTextView.setText(R.string.result_computer_wins);
-        } else if(mGame.checkForWinner()==2){
-            //mInfoTextView.setText(R.string.result_human_wins);
-        }else if(mGame.checkForWinner()==1){
-           // mInfoTextView.setText(R.string.result_tie);
-        }
-
-
-
     }
+
     // Set up the game board.
     private void startNewGame() {
         mGame.clearBoard();
+        mGame.enableButtons();
+        String text = getResources().getString(R.string.first_human);
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
         nextTurn();
 
         //start.setText(R.string.first_human);
@@ -99,8 +81,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void nextTurn(){
-       // if(!mGame.allButtonsPlayed()){
-            if (mGame.numOfButtonsPlayed()<8){
+        // if(!mGame.allButtonsPlayed()){
+        String text = getResources().getString(R.string.turn_human);
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+        if (mGame.numOfButtonsPlayed()<8){
                 for (Button button : mGame.mBoardButtons) {
                     button.setOnClickListener(this);
                }
@@ -124,16 +112,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
             mGame.mBoardButtons[location].setTextColor(Color.rgb(0, 200, 0));
         else
             mGame.mBoardButtons[location].setTextColor(Color.rgb(200, 0, 0));
-        if (mGame.numOfButtonsPlayed()>=8){
+        if (mGame.numOfButtonsPlayed()>8){
             CharSequence text;// = "Game over";
-            if (mGame.checkForWinner()==3){
-                 text = "Computer!";
-            }else if (mGame.checkForWinner()==2){
-                 text = "Human!";
-            }else if (mGame.checkForWinner()==1){
-                 text = "Tie!";
-            }else if (mGame.checkForWinner()==0){
-                 text = "No winner!";
+            String str;
+            int winner = mGame.checkForWinner();
+            if (winner==3){
+                 text = getResources().getString(R.string.result_computer_wins);
+            }else if (winner==2){
+                 text = getResources().getString(R.string.result_human_wins);
+            }else if (winner==1){
+                 text = getResources().getString(R.string.result_tie);
+            }else if (winner==0){
+                 text = getResources().getString(R.string.result_no_winner);
             }else{
                 text = "nothing";
             }
@@ -160,79 +150,113 @@ public class MainActivity extends Activity implements View.OnClickListener {
         Button button9 = mGame.mBoardButtons[8];
 
         switch (view.getId()) {
-            case R.id.one: if(button1.getText().equals(""+OPEN_SPOT)){
-                button1.setText(""+HUMAN_PLAYER);
+            case R.id.one: if(button1.getText().equals(String.valueOf(OPEN_SPOT))){
+                button1.setText(String.valueOf(HUMAN_PLAYER));
                 button1.setEnabled(false);
                 setMove('O', mGame.getComputerMove());
                 mGame.player = COMPUTER_PLAYER;
                 nextTurn();
             }
                 break;
-            case R.id.two: if(button2.getText().equals(""+OPEN_SPOT)){
-                button2.setText(""+HUMAN_PLAYER);
+            case R.id.two: if(button2.getText().equals(String.valueOf(OPEN_SPOT))){
+                button2.setText(String.valueOf(HUMAN_PLAYER));
                 button2.setEnabled(false);
                 setMove('O', mGame.getComputerMove());
                 mGame.player = COMPUTER_PLAYER;
                 nextTurn();
             }
                 break;
-            case R.id.three: if(button3.getText().equals(""+OPEN_SPOT)){
-                button3.setText(""+HUMAN_PLAYER);
+            case R.id.three: if(button3.getText().equals(String.valueOf(OPEN_SPOT))){
+                button3.setText(String.valueOf(HUMAN_PLAYER));
                 button3.setEnabled(false);
                 setMove('O', mGame.getComputerMove());
                 mGame.player = COMPUTER_PLAYER;
                 nextTurn();
             }
                 break;
-            case R.id.four: if(button4.getText().equals(""+OPEN_SPOT)){
+            case R.id.four: if(button4.getText().equals(String.valueOf(OPEN_SPOT))){
                 button4.setEnabled(false);
-                button4.setText(""+HUMAN_PLAYER);
+                button4.setText(String.valueOf(HUMAN_PLAYER));
                 setMove('O', mGame.getComputerMove());
                 mGame.player = COMPUTER_PLAYER;
                 nextTurn();
             }
                 break;
-            case R.id.five: if(button5.getText().equals(""+OPEN_SPOT)){
+            case R.id.five: if(button5.getText().equals(String.valueOf(OPEN_SPOT))){
                 button5.setEnabled(false);
-                button5.setText(""+HUMAN_PLAYER);
+                button5.setText(String.valueOf(HUMAN_PLAYER));
                 setMove('O', mGame.getComputerMove());
                 mGame.player = COMPUTER_PLAYER;
                 nextTurn();
             }
                 break;
-            case R.id.six: if(button6.getText().equals(""+OPEN_SPOT)){
+            case R.id.six: if(button6.getText().equals(String.valueOf(OPEN_SPOT))){
                 button6.setEnabled(false);
-                button6.setText(""+HUMAN_PLAYER);
+                button6.setText(String.valueOf(HUMAN_PLAYER));
                 setMove('O', mGame.getComputerMove());
                 mGame.player = COMPUTER_PLAYER;
                 nextTurn();
             }
                 break;
-            case R.id.seven: if(button7.getText().equals(""+OPEN_SPOT)){
+            case R.id.seven: if(button7.getText().equals(String.valueOf(OPEN_SPOT))){
                 button7.setEnabled(false);
-                button7.setText(""+HUMAN_PLAYER);
+                button7.setText(String.valueOf(HUMAN_PLAYER));
                 setMove('O', mGame.getComputerMove());
                 mGame.player = COMPUTER_PLAYER;
                 nextTurn();
             }
                 break;
-            case R.id.eight: if(button8.getText().equals(""+OPEN_SPOT)){
+            case R.id.eight: if(button8.getText().equals(String.valueOf(OPEN_SPOT))){
                 button8.setEnabled(false);
-                button8.setText(""+HUMAN_PLAYER);
+                button8.setText(String.valueOf(HUMAN_PLAYER));
                 setMove('O', mGame.getComputerMove());
                 mGame.player = COMPUTER_PLAYER;
                 nextTurn();
             }
                 break;
-            case R.id.nine: if(button9.getText().equals(""+OPEN_SPOT)){
+            case R.id.nine: if(button9.getText().equals(String.valueOf(OPEN_SPOT))){
                 button9.setEnabled(false);
-                button9.setText(""+HUMAN_PLAYER);
+                button9.setText(String.valueOf(HUMAN_PLAYER));
                 setMove('O', mGame.getComputerMove());
                 mGame.player = COMPUTER_PLAYER;
                 nextTurn();
             }
                 break;
         }
+        //sleep(1000);
+/*
+        CharSequence text;
+        text = getResources().getString(R.string.turn_computer);
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+*/
+        //sleep(1000);
+    }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        //respond to menu item selection
+        case R.id.btn_new_game:
+        startNewGame();
+        return true;
+        case R.id.btn_close:
+        finish();
+        return true;
+        case R.id.btn_home:
+        Intent i = new Intent(this, MainMenu.class);
+        startActivity(i);
+        return true;
+        default:
+        return super.onOptionsItemSelected(item);
+        }
     }
 }
+

@@ -18,7 +18,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.lang.Object;
 
+import static android.os.SystemClock.sleep;
 import static android.view.View.*;
 
 public class TicTacToeGame1 implements android.view.View.OnClickListener {
@@ -58,15 +62,15 @@ public class TicTacToeGame1 implements android.view.View.OnClickListener {
         Button button8 = mBoardButtons[7];
         Button button9 = mBoardButtons[8];
 
-        button1.setText(""+OPEN_SPOT);
-        button2.setText(""+OPEN_SPOT);
-        button3.setText(""+OPEN_SPOT);
-        button4.setText(""+OPEN_SPOT);
-        button5.setText(""+OPEN_SPOT);
-        button6.setText(""+OPEN_SPOT);
-        button7.setText(""+OPEN_SPOT);
-        button8.setText(""+OPEN_SPOT);
-        button9.setText(""+OPEN_SPOT);
+        button1.setText(String.valueOf(OPEN_SPOT));
+        button2.setText(String.valueOf(OPEN_SPOT));
+        button3.setText(String.valueOf(OPEN_SPOT));
+        button4.setText(String.valueOf(OPEN_SPOT));
+        button5.setText(String.valueOf(OPEN_SPOT));
+        button6.setText(String.valueOf(OPEN_SPOT));
+        button7.setText(String.valueOf(OPEN_SPOT));
+        button8.setText(String.valueOf(OPEN_SPOT));
+        button9.setText(String.valueOf(OPEN_SPOT));
 
 
     }
@@ -230,84 +234,84 @@ public class TicTacToeGame1 implements android.view.View.OnClickListener {
             Button button9 = mBoardButtons[8];
 
             //O player Computer win 3
-            if(button1.getText().equals(""+COMPUTER_PLAYER) && button2.getText().equals(""+COMPUTER_PLAYER)
-                    && button3.getText().equals(""+COMPUTER_PLAYER)){
+            if(button1.getText().equals(String.valueOf(COMPUTER_PLAYER)) && button2.getText().equals(String.valueOf(COMPUTER_PLAYER))
+                    && button3.getText().equals(String.valueOf(COMPUTER_PLAYER))){
                 //winner = 3;
                 computerWin = true;
-            }else if(button1.getText().equals(""+COMPUTER_PLAYER) && button4.getText().equals(""+COMPUTER_PLAYER)
-                    && button7.getText().equals(""+COMPUTER_PLAYER)){
+            }else if(button1.getText().equals(String.valueOf(COMPUTER_PLAYER)) && button4.getText().equals(String.valueOf(COMPUTER_PLAYER))
+                    && button7.getText().equals(String.valueOf(COMPUTER_PLAYER))){
                 //winner = 3;
                 computerWin = true;
-            }else if(button2.getText().equals(""+COMPUTER_PLAYER) && button5.getText().equals(""+COMPUTER_PLAYER)
-                    && button8.getText().equals(""+COMPUTER_PLAYER)){
+            }else if(button2.getText().equals(String.valueOf(COMPUTER_PLAYER)) && button5.getText().equals(String.valueOf(COMPUTER_PLAYER))
+                    && button8.getText().equals(String.valueOf(COMPUTER_PLAYER))){
                 //winner = 3;
                 computerWin = true;
-            }else if(button3.getText().equals(""+COMPUTER_PLAYER) && button6.getText().equals(""+COMPUTER_PLAYER)
-                    && button9.getText().equals(""+COMPUTER_PLAYER)){
+            }else if(button3.getText().equals(String.valueOf(COMPUTER_PLAYER)) && button6.getText().equals(String.valueOf(COMPUTER_PLAYER))
+                    && button9.getText().equals(String.valueOf(COMPUTER_PLAYER))){
                 //winner = 3;
                 computerWin = true;
-            }else if(button4.getText().equals(""+COMPUTER_PLAYER) && button5.getText().equals(""+COMPUTER_PLAYER)
-                    && button6.getText().equals(""+COMPUTER_PLAYER)){
+            }else if(button4.getText().equals(String.valueOf(COMPUTER_PLAYER)) && button5.getText().equals(String.valueOf(COMPUTER_PLAYER))
+                    && button6.getText().equals(String.valueOf(COMPUTER_PLAYER))){
                 //winner = 3;
                 computerWin = true;
-            }else if(button7.getText().equals(""+COMPUTER_PLAYER) && button8.getText().equals(""+COMPUTER_PLAYER)
-                    && button9.getText().equals(""+COMPUTER_PLAYER)){
+            }else if(button7.getText().equals(String.valueOf(COMPUTER_PLAYER)) && button8.getText().equals(String.valueOf(COMPUTER_PLAYER))
+                    && button9.getText().equals(String.valueOf(COMPUTER_PLAYER))){
                 //winner = 3;
                 computerWin = true;
-            }else if(button1.getText().equals(""+COMPUTER_PLAYER) && button5.getText().equals(""+COMPUTER_PLAYER)
-                    && button9.getText().equals(""+COMPUTER_PLAYER)){
+            }else if(button1.getText().equals(String.valueOf(COMPUTER_PLAYER)) && button5.getText().equals(String.valueOf(COMPUTER_PLAYER))
+                    && button9.getText().equals(String.valueOf(COMPUTER_PLAYER))){
                 //winner = 3;
                 computerWin = true;
-            }else if(button3.getText().equals(""+COMPUTER_PLAYER) && button5.getText().equals(""+COMPUTER_PLAYER)
-                    && button7.getText().equals(""+COMPUTER_PLAYER)){
+            }else if(button3.getText().equals(String.valueOf(COMPUTER_PLAYER)) && button5.getText().equals(String.valueOf(COMPUTER_PLAYER))
+                    && button7.getText().equals(String.valueOf(COMPUTER_PLAYER))){
                 //winner = 3;
                 computerWin = true;
 
                 //X player human win 2
-            }else if(button1.getText().equals(""+HUMAN_PLAYER) && button2.getText().equals(""+HUMAN_PLAYER)
-                    && button3.getText().equals(""+HUMAN_PLAYER)){
+            } if(button1.getText().equals(String.valueOf(HUMAN_PLAYER)) && button2.getText().equals(String.valueOf(HUMAN_PLAYER))
+                    && button3.getText().equals(String.valueOf(HUMAN_PLAYER))){
                 // winner = 2;
                 humanWin = true;
-            }else if(button1.getText().equals(""+HUMAN_PLAYER) && button4.getText().equals(""+HUMAN_PLAYER)
-                    && button7.getText().equals(""+HUMAN_PLAYER)){
+            }else if(button1.getText().equals(String.valueOf(HUMAN_PLAYER)) && button4.getText().equals(String.valueOf(HUMAN_PLAYER))
+                    && button7.getText().equals(String.valueOf(HUMAN_PLAYER))){
                 //winner = 3;
                 humanWin = true;
-            }else if(button2.getText().equals(""+HUMAN_PLAYER) && button5.getText().equals(""+HUMAN_PLAYER)
-                    && button8.getText().equals(""+HUMAN_PLAYER)){
+            }else if(button2.getText().equals(String.valueOf(HUMAN_PLAYER)) && button5.getText().equals(String.valueOf(HUMAN_PLAYER))
+                    && button8.getText().equals(String.valueOf(HUMAN_PLAYER))){
                 //winner = 3;
                 humanWin = true;
-            }else if(button3.getText().equals(""+HUMAN_PLAYER) && button6.getText().equals(""+HUMAN_PLAYER)
-                    && button9.getText().equals(""+HUMAN_PLAYER)){
+            }else if(button3.getText().equals(String.valueOf(HUMAN_PLAYER)) && button6.getText().equals(String.valueOf(HUMAN_PLAYER))
+                    && button9.getText().equals(String.valueOf(HUMAN_PLAYER))){
                 //winner = 3;
                 humanWin = true;
-            }else if(button4.getText().equals(""+HUMAN_PLAYER) && button5.getText().equals(""+HUMAN_PLAYER)
-                    && button6.getText().equals(""+HUMAN_PLAYER)){
+            }else if(button4.getText().equals(String.valueOf(HUMAN_PLAYER)) && button5.getText().equals(String.valueOf(HUMAN_PLAYER))
+                    && button6.getText().equals(String.valueOf(HUMAN_PLAYER))){
                 //winner = 3;
                 humanWin = true;
-            }else if(button7.getText().equals(""+HUMAN_PLAYER) && button8.getText().equals(""+HUMAN_PLAYER)
-                    && button9.getText().equals(""+HUMAN_PLAYER)){
+            }else if(button7.getText().equals(String.valueOf(HUMAN_PLAYER)) && button8.getText().equals(String.valueOf(HUMAN_PLAYER))
+                    && button9.getText().equals(String.valueOf(HUMAN_PLAYER))){
                 //winner = 3;
                 humanWin = true;
-            }else if(button1.getText().equals(""+HUMAN_PLAYER) && button5.getText().equals(""+HUMAN_PLAYER)
-                    && button9.getText().equals(""+HUMAN_PLAYER)){
+            }else if(button1.getText().equals(String.valueOf(HUMAN_PLAYER)) && button5.getText().equals(String.valueOf(HUMAN_PLAYER))
+                    && button9.getText().equals(String.valueOf(HUMAN_PLAYER))){
                 //winner = 3;
                 humanWin = true;
-            }else if(button3.getText().equals(""+HUMAN_PLAYER) && button5.getText().equals(""+HUMAN_PLAYER)
-                    && button7.getText().equals(""+HUMAN_PLAYER)){
+            }else if(button3.getText().equals(String.valueOf(HUMAN_PLAYER)) && button5.getText().equals(String.valueOf(HUMAN_PLAYER))
+                    && button7.getText().equals(String.valueOf(HUMAN_PLAYER))){
                 //winner = 3;
                 humanWin = true;
                 //if it is tie
             }
 
-            if(computerWin){
-                if (humanWin) winner = 1;
+            if (computerWin && humanWin){
+                winner = 1;
             }
-             if(humanWin && !computerWin){
-                winner = 2;
-            } if(computerWin && !humanWin){
+            else if(computerWin && !humanWin){
                 winner = 3;
-            } if (!computerWin){
-                if (!computerWin)
+            }
+            else if (!computerWin && humanWin){
+                winner = 2;
+            }else{
                 winner = 0;
             }
 
@@ -334,7 +338,7 @@ public class TicTacToeGame1 implements android.view.View.OnClickListener {
         Button button9 = mBoardButtons[8];
         int numberOfButtonsPlayed = 0;
         for (Button button: mBoardButtons){
-            if(!button.getText().equals(""+OPEN_SPOT)){
+            if(!button.getText().equals(String.valueOf(OPEN_SPOT))){
                 numberOfButtonsPlayed++;
             }
         }
@@ -355,11 +359,15 @@ public class TicTacToeGame1 implements android.view.View.OnClickListener {
         int index=0, indexToReturn = 0;
         for (Button button: mBoardButtons){
             index ++;
-            if(!button.getText().equals(""+OPEN_SPOT)){
+            if(!button.getText().equals(String.valueOf(OPEN_SPOT))){
                 indexToReturn = index;
             }
         }
         return indexToReturn;
     }
-
+    public void enableButtons(){
+        for (Button button: mBoardButtons) {
+            button.setEnabled(true);
+        }
+    }
 }

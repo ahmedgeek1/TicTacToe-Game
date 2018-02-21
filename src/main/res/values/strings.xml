@@ -7,5 +7,13 @@
         <string name="result_tie">It\'s a tie.</string>
         <string name="result_human_wins">You won!</string>
         <string name="result_computer_wins">Android won!</string>
-    </resources>
+        <string name="result_no_winner">Game Over! No Winner</string>
+        <string name="new_game_label">Start New Game</string>
+        <string name="exit_label">Exit</string>
+        <string name="about_label">About Us</string>
+        <string name="about_us_text">This is a TicTacToe game - Made by Ahmed Matoussi</string>
+        <string name="about_title">About the App</string>
+        <string name="btn_home">Home</string>
+
+</resources>
 
